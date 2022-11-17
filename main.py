@@ -2,10 +2,10 @@ from abc import ABC, abstractmethod
 
 
 class Shape(ABC):
-    def __init__(self, area=0, perimeter=0):
-        self._perimeter = area
-        self._area = perimeter
-
+    def __init__(self):
+        self._area = 0
+        self._perimeter = 0
+        
     @abstractmethod
     def calculate_area(self):
         pass
