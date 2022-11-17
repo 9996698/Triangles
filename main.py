@@ -1,20 +1,24 @@
-import math
+from abc import ABC, abstractmethod
 
 
-class Shape:
-    def __init__(self, *args):
-        self.perimeter = sum(args)
-        p = self.perimeter/2
-        mult = 1
-        for arg in args:
-            mult *= (p-arg)
-        self.area = (p*mult)**0.5
+class Shape(ABC):
+    def __init__(self, area=0, perimeter=0):
+        self._perimeter = area
+        self._area = perimeter
+
+    @abstractmethod
+    def calculate_area(self):
+        pass
+
+    @abstractmethod
+    def calculate_perimeter(self):
+        pass
 
     def get_area(self):
-        return self.area
+        return self._area
 
     def get_perimeter(self):
-        return self.perimeter
+        return self._perimeter
 
 
 class Point:
@@ -35,6 +39,7 @@ class Point:
         self.__y = y
 
 
-first_point = Point(1, 3)
-second_point = Point(5, 4)
-third_point = Point(7, 2)
+if __name__ == '__main__':
+    first_point = Point(1, 3)
+    second_point = Point(5, 4)
+    third_point = Point(7, 2)
