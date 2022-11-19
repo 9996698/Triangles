@@ -7,11 +7,11 @@ class Shape(ABC):
         self._perimeter = 0
 
     @abstractmethod
-    def calculate_area(self):
+    def _calculate_area(self):
         pass
 
     @abstractmethod
-    def calculate_perimeter(self):
+    def _calculate_perimeter(self):
         pass
 
     def get_area(self):
@@ -42,11 +42,11 @@ class Point:
 class Triangle(Shape):
 
     def __init__(self, a, b, c):
-        self._a = a
-        self._b = b
-        self._c = c
+        self.__a = a
+        self.__b = b
+        self.__c = c
         self.type = self.__qualify_type(self.__get_side(a, b), self.__get_side(b, c), self.__get_side(a, c))
-        self.type_angle = self.__qualify_type_angle
+        self.type_angle = self.__qualify_type_angle()
         super().__init__()
 
     @staticmethod
@@ -56,23 +56,27 @@ class Triangle(Shape):
     def __qualify_type(self, ab: float, bc: float, ca: float) -> float:
         pass
 
-    def __qualify_type_angle(self, ab, bc, ca):
+    def __qualify_type_angle(self, ab: float, bc: float, ca: float) -> float:
         pass
 
-    def calculate_perimeter(self):
-        return self._a + self._b + self._c
+    def _calculate_perimeter(self):
+        return self.__a + self.__b + self.__c
 
-    def calculate_area(self):
-        p = self._a + self._b + self._c
+    def _calculate_area(self):
+        p = self.__a + self.__b + self.__c
         s = p/2
         s1 = 1
-        args = [self._a, self._b, self._c]
+        args = [self.__a, self.__b, self.__c]
         for arg in args:
             s1 *= (s - arg)
         return print((s * s1)**0.5)
+
+    def __str__(self):
+        pass
 
 
 if __name__ == '__main__':
     first_point = Point(1, 3)
     second_point = Point(5, 4)
     third_point = Point(7, 2)
+    
