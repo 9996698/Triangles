@@ -45,8 +45,8 @@ class Triangle(Shape):
         self.__a = a
         self.__b = b
         self.__c = c
-        self.type = self.__qualify_type(self.__get_side(a, b), self.__get_side(b, c), self.__get_side(a, c))
-        self.type_angle = self.__qualify_type_angle(self.__get_side(a, b), self.__get_side(b, c), self.__get_side(a, c))
+        self.__type = self.__qualify_type(self.__get_side(a, b), self.__get_side(b, c), self.__get_side(c, a))
+        self.__type_angle = self.__qualify_type_angle(self.__get_side(a, b), self.__get_side(b, c), self.__get_side(c, a))
         super().__init__()
 
     @staticmethod
@@ -80,4 +80,3 @@ if __name__ == '__main__':
     second_point = Point(5, 4)
     third_point = Point(7, 2)
 
-    first_triangle = Triangle(first_point, second_point, third_point)
