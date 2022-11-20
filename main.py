@@ -46,7 +46,7 @@ class Triangle(Shape):
         self.__b = b
         self.__c = c
         self.type = self.__qualify_type(self.__get_side(a, b), self.__get_side(b, c), self.__get_side(a, c))
-        self.type_angle = self.__qualify_type_angle()
+        self.type_angle = self.__qualify_type_angle(self.__get_side(a, b), self.__get_side(b, c), self.__get_side(a, c))
         super().__init__()
 
     @staticmethod
@@ -69,7 +69,7 @@ class Triangle(Shape):
         args = [self.__a, self.__b, self.__c]
         for arg in args:
             s1 *= (s - arg)
-        return print((s * s1)**0.5)
+        return (s * s1)**0.5
 
     def __str__(self):
         pass
@@ -79,4 +79,5 @@ if __name__ == '__main__':
     first_point = Point(1, 3)
     second_point = Point(5, 4)
     third_point = Point(7, 2)
-    
+
+    first_triangle = Triangle(first_point, second_point, third_point)
