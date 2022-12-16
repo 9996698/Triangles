@@ -7,11 +7,11 @@ class Shape(ABC):
         self._perimeter = 0
 
     @abstractmethod
-    def _calculate_area(self):
+    def _calculate_area(self, ab, bc, ca):
         pass
 
     @abstractmethod
-    def _calculate_perimeter(self):
+    def _calculate_perimeter(self, ab, bc, ca):
         pass
 
     def get_area(self):
@@ -78,26 +78,36 @@ class Triangle(Shape):
         else:
             return "obtuse - angled"
 
-    def _calculate_perimeter(self):
-        return self.__get_side(self.__a, self.__b) + self.__get_side(self.__b, self.__c) \
-               + self.__get_side(self.__c, self.__a)
+    def _calculate_perimeter(self, ab, bc, ca):
+        return ab + bc + ca
 
-    def _calculate_area(self):
-        p = self.__a + self.__b + self.__c
-        s = p / 2
-        s1 = 1
-        args = [self.__a, self.__b, self.__c]
+    def _calculate_area(self, ab: float, bc: float, ca: float):
+        perimeter = ab + bc + ca
+        semi_perimeter = perimeter / 2
+        square = 1
+        args = [ab, bc, ca]
         for arg in args:
-            s1 *= (s - arg)
-        return (s * s1) ** 0.5
+            square *= (semi_perimeter - arg)
+        return (semi_perimeter * square) ** 0.5
 
     def __str__(self):
-        return self.__type, self.__type_angle
+        return self.__type, self.__type_angle, self._calculate_area(self.__get_side(self.__a, self.__b),
+                                                                    self.__get_side(self.__b, self.__c),
+                                                                    self.__get_side(self.__c, self.__a)), \
+               self._calculate_perimeter(self.__get_side(self.__a, self.__b),
+                                         self.__get_side(self.__b, self.__c), self.__get_side(self.__c, self.__a))
+
+
+def create_triangle():
+    print("How many triangle do you want to create: ")
+    test_cases = int(input())
+    for i in range(test_cases):
+        first_point = Point(int(input()), int(input()))
+        second_point = Point(int(input()), int(input()))
+        third_point = Point(int(input()), int(input()))
+        triangle = Triangle(first_point, second_point, third_point)
+        print(triangle.__str__())
 
 
 if __name__ == '__main__':
-    first_point = Point(0, 5)
-    second_point = Point(0, 0)
-    third_point = Point(5, 0)
-    Triangle1 = Triangle(first_point, second_point, third_point)
-    print(Triangle1.__str__())
+    create_triangle()
