@@ -85,22 +85,26 @@ class Triangle(Shape):
         perimeter = ab + bc + ca
         semi_perimeter = perimeter / 2
         square = 1
-        args = [ab, bc, ca]
-        for arg in args:
-            square *= (semi_perimeter - arg)
+        sides = [ab, bc, ca]
+        for side in sides:
+            square *= (semi_perimeter - side)
         return (semi_perimeter * square) ** 0.5
 
     def __str__(self):
-        return self.__type, self.__type_angle, self._calculate_area(self.__get_side(self.__a, self.__b),
-                                                                    self.__get_side(self.__b, self.__c),
-                                                                    self.__get_side(self.__c, self.__a)), \
-               self._calculate_perimeter(self.__get_side(self.__a, self.__b),
-                                         self.__get_side(self.__b, self.__c), self.__get_side(self.__c, self.__a))
+        return print(f'Type of triangle: {self.__type} \
+                Type of triangle of angles: {self.__type_angle} \
+                Area of triangle: {self._calculate_area(self.__get_side(self.__a, self.__b), self.__get_side(self.__b, self.__c), self.__get_side(self.__c, self.__a))}\
+               Perimeter of triangle: {self._calculate_perimeter(self.__get_side(self.__a, self.__b), self.__get_side(self.__b, self.__c), self.__get_side(self.__c, self.__a))}')
+
+
+def main():
+    return create_triangle()
 
 
 def create_triangle():
     print("How many triangle do you want to create: ")
     test_cases = int(input())
+    print("Input the coordinates of the points: ")
     for i in range(test_cases):
         first_point = Point(int(input()), int(input()))
         second_point = Point(int(input()), int(input()))
@@ -110,4 +114,4 @@ def create_triangle():
 
 
 if __name__ == '__main__':
-    create_triangle()
+    main()
